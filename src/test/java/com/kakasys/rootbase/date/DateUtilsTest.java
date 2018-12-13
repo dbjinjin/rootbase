@@ -23,12 +23,13 @@ import java.util.Date;
 public class DateUtilsTest
 {
     private Logger logger = LogManager.getLogger(DateUtilsTest.class);
+
     @Test
     public void test()
     {
-        logger.info(DateUtils.getServerDate());
+        logger.debug(DateUtils.getServerDate());
         logger.info(DateUtils.getServerDate(true));
-        logger.info(DateUtils.getStrDate("1990-06-24",FormatStyle.STYLE_DATE));
-        logger.info(DateUtils.getDateStr(new Date(),FormatStyle.STYLE_TIME));
+        logger.warn(DateUtils.getStrDate("1990-06-24", FormatStyle.STYLE_DATE));
+        logger.error(DateUtils.getDateStr(new Date(), FormatStyle.STYLE_TIME));
     }
 }

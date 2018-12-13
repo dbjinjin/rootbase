@@ -1,25 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration>
+
+    <properties>
+        <property name="LOG_HOME">logs</property>
+    </properties>
+
     <Appenders>
+
+        <!-- 控制台日志输出 -->
         <Console name="STDOUT" target="SYSTEM_OUT">
             <PatternLayout pattern="%d %-5p [%t] %C (%F:%L) - %m%n"/>
         </Console>
-        <RollingFile name="RollingFile" fileName="logs/rootbase.log"
-                     filePattern="logs/$${date:yyyy-MM}/app-%d{MM-dd-yyyy}-%i.log.gz">
+
+        <!-- Info级别日志文件输出 -->
+        <RollingFile name="InfoRollingFile" fileName="${LOG_HOME}/info/rootbase.log"
+                     filePattern="${LOG_HOME}/info/$${date:yyyy-MM}/app-%d{MM-dd-yyyy}-%i.log.gz">
+            <Filters>
+                <ThresholdFilter level="warn" onMatch="DENY" onMismatch="NEUTRAL"/>
+                <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY" />
+            </Filters>
             <PatternLayout>
-                <Pattern>%d{MM-dd-yyyy} %p %c{1.} [%t] -%M-%L- %m%n</Pattern>
+                <Pattern>%date{yyyy-MM-dd HH:mm:ss.SSS} %level [%thread][%file:%line] - %msg%n</Pattern>
             </PatternLayout>
             <Policies>
                 <TimeBasedTriggeringPolicy />
-                <SizeBasedTriggeringPolicy size="1 KB"/>
+                <SizeBasedTriggeringPolicy size="1KB"/>
             </Policies>
-            <DefaultRolloverStrategy fileIndex="max" max="2"/>
+            <DefaultRolloverStrategy fileIndex="max" max="20"/>
         </RollingFile>
+
+        <!--WARN级别日志文件输出 -->
+        <RollingFile name="WarnRollingFile" fileName="${LOG_HOME}/warn/rootbase.log"
+                     filePattern="${LOG_HOME}/warn/$${date:yyyy-MM}/app-%d{MM-dd-yyyy}-%i.log.gz">
+            <Filters>
+                <ThresholdFilter level="error" onMatch="DENY" onMismatch="NEUTRAL"/>
+                <ThresholdFilter level="warn" onMatch="ACCEPT" onMismatch="DENY" />
+            </Filters>
+            <PatternLayout>
+                <Pattern>%date{yyyy-MM-dd HH:mm:ss.SSS} %level [%thread][%file:%line] - %msg%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="1KB"/>
+            </Policies>
+            <DefaultRolloverStrategy fileIndex="max" max="20"/>
+        </RollingFile>
+
+        <!--ERROR级别日志文件输出 -->
+        <RollingFile name="ErrorRollingFile" fileName="${LOG_HOME}/error/rootbase.log"
+                     filePattern="${LOG_HOME}/error/$${date:yyyy-MM}/app-%d{MM-dd-yyyy}-%i.log.gz">
+            <Filters>
+                <ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY" />
+            </Filters>
+            <PatternLayout>
+                <Pattern>%date{yyyy-MM-dd HH:mm:ss.SSS} %level [%thread][%file:%line] - %msg%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="1KB"/>
+            </Policies>
+            <DefaultRolloverStrategy fileIndex="max" max="20"/>
+        </RollingFile>
+
     </Appenders>
     <Loggers>
-        <Logger name="com.kakasys.rootbase" level="DEBUG"/>
-        <Root level="INFO">
+        <Root level="DEBUG">
             <AppenderRef ref="STDOUT"/>
+            <AppenderRef ref="InfoRollingFile"/>
+            <AppenderRef ref="WarnRollingFile"/>
+            <AppenderRef ref="ErrorRollingFile"/>
         </Root>
     </Loggers>
 
