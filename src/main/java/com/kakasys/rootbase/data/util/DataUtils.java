@@ -8,7 +8,9 @@ import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -27,6 +29,18 @@ import java.util.Random;
 public class DataUtils
 {
     private static Logger logger = LogManager.getLogger(DataUtils.class);
+
+
+    public static <T> List<T> buildRandomListData(Class<T> tClass, int size)
+    {
+        List<T> ts = new ArrayList<>();
+        for (int i = 0; i < size; i++)
+        {
+            T t = buildRandomData(tClass);
+            ts.add(t);
+        }
+        return ts;
+    }
 
     public static <T> T buildRandomData(Class<T> tClass)
     {
