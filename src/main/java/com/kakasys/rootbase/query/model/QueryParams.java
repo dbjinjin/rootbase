@@ -17,4 +17,62 @@ import com.kakasys.rootbase.model.BaseModel;
  */
 public class QueryParams extends BaseModel
 {
+    private Integer pageNumber;//页数
+    private Integer pageSize;//每页数量
+    private Integer pageIndex;//分页索引
+    private String sortName;//排序字段
+    private String sortOrder;//排序规则
+
+
+    public Integer getPageIndex()
+    {
+        return pageIndex;
+    }
+
+    public void setPageIndex(Integer pageIndex)
+    {
+        this.pageIndex = pageIndex;
+    }
+
+    public Integer getPageNumber()
+    {
+        return pageNumber;
+    }
+
+    public void setPageNumber(Integer pageNumber)
+    {
+        this.pageNumber = pageNumber;
+    }
+
+    public Integer getPageSize()
+    {
+        return pageSize;
+    }
+
+    public void setPageSize(Integer pageSize)
+    {
+        this.pageSize = pageSize;
+    }
+
+    public String getSortName()
+    {
+        return sortName;
+    }
+
+    public void setSortName(String sortName)
+    {
+        this.sortName = sortName;
+    }
+
+    public String getSortOrder()
+    {
+        return sortOrder;
+    }
+
+    public void setSortOrder(String sortOrder)
+    {
+        this.sortOrder = sortOrder;
+    }
+
+
 }
