@@ -1,5 +1,7 @@
 package com.kakasys.rootbase.invoke.model;
 
+import com.kakasys.rootbase.page.model.PageInfo;
+
 import java.io.Serializable;
 
 /**
@@ -31,6 +33,8 @@ public class InvokeResult<T> implements Serializable
 
     //响应编码
     private String code;
+
+    private PageInfo pageInfo;
 
     public InvokeResult()
     {
@@ -84,5 +88,15 @@ public class InvokeResult<T> implements Serializable
     public void setCode(String code)
     {
         this.code = code;
+    }
+
+    public PageInfo getPageInfo()
+    {
+        return pageInfo;
+    }
+
+    public void setPageInfo(PageInfo pageInfo)
+    {
+        this.pageInfo = pageInfo;
     }
 }

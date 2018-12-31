@@ -39,20 +39,11 @@ public class QueryParams extends BaseModel
         return pageNumber;
     }
 
-    public void setPageNumber(Integer pageNumber)
-    {
-        this.pageNumber = pageNumber;
-    }
-
     public Integer getPageSize()
     {
         return pageSize;
     }
 
-    public void setPageSize(Integer pageSize)
-    {
-        this.pageSize = pageSize;
-    }
 
     public String getSortName()
     {
@@ -74,5 +65,27 @@ public class QueryParams extends BaseModel
         this.sortOrder = sortOrder;
     }
 
+
+    public void setPageNumber(Integer pageNumber)
+    {
+        this.pageNumber = pageNumber;
+    }
+
+    public void setPageSize(Integer pageSize)
+    {
+        this.pageSize = pageSize;
+        calculate();
+    }
+
+    /**
+     * 计算pageIndex
+     */
+    private void calculate()
+    {
+        if (pageNumber != null && pageSize != null)
+        {
+            this.setPageIndex((pageNumber - 1) * pageSize);
+        }
+    }
 
 }

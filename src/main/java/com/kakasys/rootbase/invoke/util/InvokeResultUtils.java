@@ -3,6 +3,7 @@ package com.kakasys.rootbase.invoke.util;
 import com.kakasys.rootbase.invoke.code.InvokeCodeDef;
 import com.kakasys.rootbase.invoke.common.InvokeConstant;
 import com.kakasys.rootbase.invoke.model.InvokeResult;
+import com.kakasys.rootbase.page.model.PageInfo;
 import com.kakasys.rootbase.string.StrUtils;
 import com.kakasys.rootbase.token.util.TokenUtils;
 
@@ -25,22 +26,27 @@ public class InvokeResultUtils
 {
     public static <T> InvokeResult<T> buildSuccResult()
     {
-        return buildResult(InvokeCodeDef.SUCC, null, null);
+        return buildResult(InvokeCodeDef.SUCC, null, null, null);
     }
 
     public static <T> InvokeResult<T> buildSuccResult(String message)
     {
-        return buildResult(InvokeCodeDef.SUCC, message, null);
+        return buildResult(InvokeCodeDef.SUCC, message, null, null);
     }
 
     public static <T> InvokeResult<T> buildSuccResult(String message, T data)
     {
-        return buildResult(InvokeCodeDef.SUCC, message, data);
+        return buildResult(InvokeCodeDef.SUCC, message, data, null);
+    }
+
+    public static <T> InvokeResult<T> buildSuccResult(String message, T data, PageInfo pageInfo)
+    {
+        return buildResult(InvokeCodeDef.SUCC, message, data, pageInfo);
     }
 
     public static <T> InvokeResult<T> buildFailResult(String message)
     {
-        return buildResult(InvokeCodeDef.FAIL, message, null);
+        return buildResult(InvokeCodeDef.FAIL, message, null, null);
     }
 
     public static <T> InvokeResult<T> buildFailResult(InvokeCodeDef codeDef, String message)
@@ -49,7 +55,7 @@ public class InvokeResultUtils
         {
             throw new IllegalArgumentException("参数错误~！");
         }
-        return buildResult(codeDef, message, null);
+        return buildResult(codeDef, message, null, null);
     }
 
     public static <T> InvokeResult<T> buildExceResult(Exception e)
@@ -59,11 +65,11 @@ public class InvokeResultUtils
 
     public static <T> InvokeResult<T> buildExceResult(Exception e, String message)
     {
-        return buildResult(InvokeCodeDef.PROGRAM_ERROR, StrUtils.isNotNull(message) ? message : e.getMessage(), null);
+        return buildResult(InvokeCodeDef.PROGRAM_ERROR, StrUtils.isNotNull(message) ? message : e.getMessage(), null, null);
     }
 
 
-    public static <T> InvokeResult<T> buildResult(InvokeCodeDef codeDef, String message, T data)
+    public static <T> InvokeResult<T> buildResult(InvokeCodeDef codeDef, String message, T data, PageInfo pageInfo)
     {
         InvokeResult<T> result = new InvokeResult<>();
         result.setToken(TokenUtils.buildToken());
@@ -71,6 +77,7 @@ public class InvokeResultUtils
         result.setMessage(StrUtils.isNotNull(message) ? message : codeDef.getMessage());
         result.setResult(codeDef == InvokeCodeDef.SUCC ? InvokeConstant.RESULT_SUCC : InvokeConstant.RESULT_FAIL);
         result.setData(data);
+        result.setPageInfo(pageInfo);
         return result;
     }
 }
