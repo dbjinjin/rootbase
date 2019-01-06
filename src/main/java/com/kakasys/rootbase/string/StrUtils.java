@@ -49,4 +49,24 @@ public class StrUtils
             return isNull(str1) ? str2 : str1;
         }
     }
+
+    public static int obj2int(Object obj, int defaultVal)
+    {
+        if (obj == null)
+        {
+            return defaultVal;
+        } else
+        {
+            if (obj instanceof Number)
+            {
+                Number number = (Number) obj;
+                return number.intValue();
+            } else if (obj instanceof String)
+            {
+                String objStr = (String) obj;
+                return Integer.parseInt(objStr);
+            }
+            return defaultVal;
+        }
+    }
 }

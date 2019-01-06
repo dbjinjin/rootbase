@@ -1,6 +1,7 @@
 package com.kakasys.rootbase.data.util;
 
 import com.kakasys.rootbase.date.util.DateUtils;
+import com.kakasys.rootbase.string.StrUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -30,6 +31,19 @@ public class DataUtils
 {
     private static Logger logger = LogManager.getLogger(DataUtils.class);
 
+    private static String[] arrays = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"};
+
+    public static String buildRandomCode(int length)
+    {
+        int arraysLength = arrays.length;
+        String str = null;
+        for (int i = 0; i < length; i++)
+        {
+            int index = new Random().nextInt(arraysLength);
+            str = StrUtils.strConcat(str, "", arrays[index]);
+        }
+        return str;
+    }
 
     public static <T> List<T> buildRandomListData(Class<T> tClass, int size)
     {
