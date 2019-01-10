@@ -50,6 +50,11 @@ public class StrUtils
         }
     }
 
+    public static int obj2int(Object obj)
+    {
+        return obj2int(obj, 0);
+    }
+
     public static int obj2int(Object obj, int defaultVal)
     {
         if (obj == null)
@@ -67,6 +72,22 @@ public class StrUtils
                 return Integer.parseInt(objStr);
             }
             return defaultVal;
+        }
+    }
+
+    public static String obj2str(Object obj)
+    {
+        return obj2str(obj, null);
+    }
+
+    public static String obj2str(Object obj, String defaultVal)
+    {
+        if (obj == null)
+        {
+            return defaultVal;
+        } else
+        {
+            return obj.toString();
         }
     }
 }

@@ -31,10 +31,25 @@ public class DataUtils
 {
     private static Logger logger = LogManager.getLogger(DataUtils.class);
 
-    private static String[] arrays = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"};
 
-    public static String buildRandomCode(int length)
+    private static String[] arrays1 = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0"};
+    private static String[] arrays2 = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"};
+    private static String[] arrays3 = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"};
+
+
+    public static String buildRandomCode(int length, int type)
     {
+        String[] arrays;
+        if (type == 0)
+        {
+            arrays = arrays1;
+        } else if (type == 1)
+        {
+            arrays = arrays2;
+        } else
+        {
+            arrays = arrays3;
+        }
         int arraysLength = arrays.length;
         String str = null;
         for (int i = 0; i < length; i++)
